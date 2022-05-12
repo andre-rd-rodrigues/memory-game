@@ -1,41 +1,63 @@
 //Colors
-$dark: #3e4042;
-$grey: #979797;
-$light-grey: #ececec;
-$green: #08a742;
-$light-green: #85e294;
-$red: #c84444;
-$blue: #6199e7;
+$primary: #32475b;
+$primary-light: #6789a0;
+$secondary: #b8ccdc;
+$secondary-light: #dfe8f0;
+$orange: #f8a51f;
+
+//Sizes
+$breaking-point-xl: 1600px;
+$breaking-point-lg: 1400px;
+$breaking-point-md: 990px;
+$breaking-point-sm: 414px;
+$breaking-point-xs: 330px;
+
+//Media queries
+@mixin breakpoint($point) {
+  @if $point == xl {
+    @media (max-width: $breaking-point-xl) {
+      @content;
+    }
+  } @else if $point == lg {
+    @media (max-width: $breaking-point-lg) {
+      @content;
+    }
+  } @else if $point == md {
+    @media (max-width: $breaking-point-md) {
+      @content;
+    }
+  } @else if $point == sm {
+    @media (max-width: $breaking-point-sm) {
+      @content;
+    }
+  } @else if $point == xs {
+    @media (max-width: $breaking-point-xs) {
+      @content;
+    }
+  }
+}
 
 //Shapes
 @mixin button($bg-color, $color) {
   background-color: $bg-color;
   box-shadow: 0 1px 2px rgba(38, 41, 44, 0.08);
   border: none;
-  padding: 0.25rem 1.5rem;
+  padding: 0.6rem 1.5rem;
   color: $color;
   font-size: 1rem;
   font-weight: bold;
-  border-radius: 2px;
+  border-radius: 1.5rem;
   transition: 0.2s ease;
   &:hover {
     opacity: 0.7;
   }
 }
 
-//Sizes
-$breaking-point-lg: 1400px;
-$breaking-point-md: 990px;
-$breaking-point-sm: 414px;
-$breaking-point-xs: 330px;
-
 //Exports
 :export {
-  red: $red;
-  green: $green;
-  dark: $dark;
-  grey: $grey;
-  light-grey: $light-grey;
-  light-green: $light-green;
-  blue: $blue;
+  primary: $primary;
+  primary-light: $primary-light;
+  secondary: $secondary;
+  secondary-light: $secondary-light;
+  orange: $orange;
 }
