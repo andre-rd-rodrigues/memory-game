@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import styles from "./formgroup.module.scss";
 import colors from "styles/_mixins.scss";
 
-const FormGroup = ({ label, inputs = [""] }) => {
+const FormGroup = ({ label, inputs = [""], onChange }) => {
   const [selected, setSelected] = useState(inputs[0]);
 
   const renderStyle = (button) => {
@@ -11,12 +11,17 @@ const FormGroup = ({ label, inputs = [""] }) => {
     };
   };
 
+  useEffect(() => {
+    onChange(selected);
+  }, [selected]);
+
   return (
     <div className={styles.formGroup}>
       <p className="form-label">{label}</p>
       <div className="form-select">
-        {inputs.map((button) => (
+        {inputs.map((button, index) => (
           <button
+            key={index}
             onClick={() => setSelected(button)}
             style={renderStyle(button)}
           >
@@ -28,4 +33,4 @@ const FormGroup = ({ label, inputs = [""] }) => {
   );
 };
 
-export default FormGroup;
+export default memo(FormGroup);

@@ -29,4 +29,10 @@ const generateRandomIconsBoard = (n) => {
   }
   return result;
 };
-export { generateNumbersArray, generateRandomIconsBoard };
+const getTimeElapsed = (started, finished) => {
+  const milliseconds = finished - started;
+  const minutes = Math.floor(milliseconds / 60000);
+  const seconds = ((milliseconds % 60000) / 1000).toFixed(0);
+  return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+};
+export { generateNumbersArray, generateRandomIconsBoard, getTimeElapsed };

@@ -2,10 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { generateRandomIconsBoard } from "utils/globalUtils";
 import FeatherIcon from "feather-icons-react";
 import "./game.scss";
+import WinnerModal from "components/Modals/WinnerModal";
+import { updateGameTime } from "store/entities/game";
+import { connect } from "react-redux";
 
-function GameBoard() {
+function GameBoard({ updateGameTime, boardReset }) {
   const [cards, setCards] = useState([]);
   const [randomBoardContent, setRandomBoardContent] = useState(undefined);
+  const [winnerModal, setWinnerModal] = useState(false);
 
   const cardsRef = useRef([]);
 
@@ -25,6 +29,10 @@ function GameBoard() {
     if (itemClassList.contains("flip")) return;
     itemClassList.add("flip");
     setCards(cardsCopy);
+  };
+  const handleWin = () => {
+    updateGameTime({ type: "finished", value: Date.now() });
+    setWinnerModal(true);
   };
 
   const checkMatch = () => {
@@ -57,9 +65,18 @@ function GameBoard() {
     const filteredMatch = cards.filter((icon) =>
       icon.classList.contains("matched")
     );
-    if (filteredMatch.length === 4 * 4) return alert("Won!");
+    if (filteredMatch.length === 4 * 4) return handleWin();
   };
-
+  const restoreMatchedCards = () => {
+    const cardsCopy = [...cards];
+    const flippedCards = cardsCopy.filter((icon) =>
+      icon.classList.contains("matched")
+    );
+    if (flippedCards.length > 0) {
+      flippedCards.forEach((item) => item.classList.remove("matched"));
+      setCards(cardsCopy);
+    }
+  };
   //Lifecycle
   useEffect(() => {
     checkMatch();
@@ -70,6 +87,13 @@ function GameBoard() {
     setCards(cardsRef.current);
     setRandomBoardContent(generateRandomIconsBoard(4 * 4));
   }, []);
+
+  useEffect(() => {
+    if (boardReset) {
+      restoreMatchedCards();
+      setRandomBoardContent(generateRandomIconsBoard(4 * 4));
+    }
+  }, [boardReset]);
 
   return (
     <div className="game-board">
@@ -85,8 +109,21 @@ function GameBoard() {
           <FeatherIcon icon={icon} />
         </div>
       ))}
+      <WinnerModal show={winnerModal} onHide={() => setWinnerModal(false)} />
     </div>
   );
 }
 
-export default GameBoard;
+const mapStateToProps = (state) => {
+  return {
+    boardReset: state.entities.game.board.reset
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateGameTime: (obj) => dispatch(updateGameTime(obj))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameBoard);
