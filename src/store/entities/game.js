@@ -40,7 +40,13 @@ const slice = createSlice({
       return { ...game, time: { ...game.time, [payload.type]: payload.value } };
     },
     updateWinner: (game, { payload }) => {
-      return;
+      const gameCopy = { ...game };
+      const index = gameCopy.players.findIndex(
+        (player) => player.id === payload.id
+      );
+      gameCopy.players[index].winner = true;
+      gameCopy.time.finished = Date.now();
+      return gameCopy;
     },
     restartGame: (game) => {
       const playersCopy = [...game.players];

@@ -3,10 +3,11 @@ import { generateRandomIconsBoard } from "utils/globalUtils";
 import FeatherIcon from "feather-icons-react";
 import "./game.scss";
 import WinnerModal from "components/Modals/WinnerModal";
-import { updateGameTime } from "store/entities/game";
+import { updateWinner } from "store/entities/game";
 import { connect } from "react-redux";
 
-function GameBoard({ updateGameTime, boardReset }) {
+function GameBoard({ updateWinner, boardReset }) {
+  const [currentPlayer, setCurrentPlayer] = useState({ id: 1, moves: 0 });
   const [cards, setCards] = useState([]);
   const [randomBoardContent, setRandomBoardContent] = useState(undefined);
   const [winnerModal, setWinnerModal] = useState(false);
@@ -31,7 +32,8 @@ function GameBoard({ updateGameTime, boardReset }) {
     setCards(cardsCopy);
   };
   const handleWin = () => {
-    updateGameTime({ type: "finished", value: Date.now() });
+    updateWinner({ id: currentPlayer.id });
+
     setWinnerModal(true);
   };
 
@@ -60,7 +62,6 @@ function GameBoard({ updateGameTime, boardReset }) {
       }
     }
   };
-
   const checkWin = () => {
     const filteredMatch = cards.filter((icon) =>
       icon.classList.contains("matched")
@@ -122,7 +123,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateGameTime: (obj) => dispatch(updateGameTime(obj))
+    updateWinner: (obj) => dispatch(updateWinner(obj))
   };
 };
 
