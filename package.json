@@ -1,7 +1,12 @@
 {
-  "name": "memory-app",
+  "name": "memory-game",
   "version": "0.1.0",
-  "private": true,
+  "author": {
+    "name": "Andre Rodrigues",
+    "url": "https://andre-rd-rodrigues.github.io/portfolio"
+  },
+  "private": false,
+  "homepage": "http://andre-rd-rodrigues.github.io/memory-game/",
   "dependencies": {
     "@babel/eslint-parser": "^7.17.0",
     "@reduxjs/toolkit": "^1.8.1",
