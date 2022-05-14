@@ -27,8 +27,9 @@
 .game-board {
   margin: auto;
   display: flex;
-  max-width: 360px;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   & .memory-card {
     background-color: $primary;
     margin: 0.5rem;

@@ -6,7 +6,17 @@ const icons = [
   "anchor",
   "bell",
   "battery-charging",
-  "camera"
+  "camera",
+  "archive",
+  "clock",
+  "cloud-lightning",
+  "coffee",
+  "film",
+  "dollar",
+  "headphones",
+  "image",
+  "key",
+  "moon"
 ];
 
 export { icons };

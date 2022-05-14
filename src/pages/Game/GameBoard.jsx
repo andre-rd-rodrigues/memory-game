@@ -106,7 +106,10 @@ function GameBoard({ updateWinner, boardReset, addPlayerMove, settings }) {
   }, [boardReset]);
 
   return (
-    <div className="game-board">
+    <div
+      className="game-board"
+      style={{ maxWidth: boardSize === 4 ? "360px" : "550px" }}
+    >
       {randomBoardContent?.map((element, i) => (
         <div
           ref={(item) => (cardsRef.current[i] = item)}
