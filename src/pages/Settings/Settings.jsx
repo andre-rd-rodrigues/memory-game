@@ -42,11 +42,11 @@ const Settings = ({
           inputs={["Icons", "Numbers"]}
           onChange={handleChange}
         />
-        <FormGroup
+        {/* <FormGroup
           label="Number of Players"
           inputs={generateNumbersArray(4)}
           onChange={handleChange}
-        />
+        /> */}
         <FormGroup
           label="Grid Size"
           inputs={["4x4", "6x6"]}

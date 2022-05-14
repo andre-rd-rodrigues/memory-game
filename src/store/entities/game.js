@@ -26,6 +26,12 @@ const slice = createSlice({
     ]
   },
   reducers: {
+    addPlayerMove: (game, { payload }) => {
+      const playerIndex = game.players.findIndex(
+        (player) => player.id === payload.id
+      );
+      game.players[playerIndex].moves += 1;
+    },
     updatePlayers: (game, { payload }) => {
       let result = [];
       for (let i = 1; i <= payload.numberOfPlayers; i++) {
@@ -77,7 +83,8 @@ export const {
   updateGameTime,
   updateWinner,
   restartGame,
-  restoreBoardReset
+  restoreBoardReset,
+  addPlayerMove
 } = slice.actions;
 
 export default slice.reducer;

@@ -3,10 +3,10 @@ import { generateRandomIconsBoard } from "utils/globalUtils";
 import FeatherIcon from "feather-icons-react";
 import "./game.scss";
 import WinnerModal from "components/Modals/WinnerModal";
-import { updateWinner } from "store/entities/game";
+import { addPlayerMove, updateWinner } from "store/entities/game";
 import { connect } from "react-redux";
 
-function GameBoard({ updateWinner, boardReset }) {
+function GameBoard({ updateWinner, boardReset, addPlayerMove }) {
   const [currentPlayer, setCurrentPlayer] = useState({ id: 1, moves: 0 });
   const [cards, setCards] = useState([]);
   const [randomBoardContent, setRandomBoardContent] = useState(undefined);
@@ -28,7 +28,9 @@ function GameBoard({ updateWinner, boardReset }) {
     const itemClassList = cardsCopy[index].classList;
 
     if (itemClassList.contains("flip")) return;
+
     itemClassList.add("flip");
+    addPlayerMove({ id: currentPlayer.id });
     setCards(cardsCopy);
   };
   const handleWin = () => {
@@ -123,7 +125,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateWinner: (obj) => dispatch(updateWinner(obj))
+    updateWinner: (obj) => dispatch(updateWinner(obj)),
+    addPlayerMove: (obj) => dispatch(addPlayerMove(obj))
   };
 };
 
