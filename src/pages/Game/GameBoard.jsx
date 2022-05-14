@@ -1,18 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
-import { generateRandomIconsBoard } from "utils/globalUtils";
+import { generateRandomBoard } from "utils/globalUtils";
 import FeatherIcon from "feather-icons-react";
 import "./game.scss";
 import WinnerModal from "components/Modals/WinnerModal";
 import { addPlayerMove, updateWinner } from "store/entities/game";
 import { connect } from "react-redux";
 
-function GameBoard({ updateWinner, boardReset, addPlayerMove }) {
+function GameBoard({ updateWinner, boardReset, addPlayerMove, settings }) {
   const [currentPlayer, setCurrentPlayer] = useState({ id: 1, moves: 0 });
   const [cards, setCards] = useState([]);
   const [randomBoardContent, setRandomBoardContent] = useState(undefined);
   const [winnerModal, setWinnerModal] = useState(false);
 
   const cardsRef = useRef([]);
+
+  const { boardSize, theme } = settings;
 
   //Actions
   const handleSelect = (iconName) => {
@@ -38,7 +40,6 @@ function GameBoard({ updateWinner, boardReset, addPlayerMove }) {
 
     setWinnerModal(true);
   };
-
   const checkMatch = () => {
     const cardsCopy = [...cards];
     const flippedCards = cardsCopy.filter((icon) =>
@@ -80,6 +81,12 @@ function GameBoard({ updateWinner, boardReset, addPlayerMove }) {
       setCards(cardsCopy);
     }
   };
+  const renderTheme = (element) =>
+    theme === "icons" ? (
+      <FeatherIcon icon={element} />
+    ) : (
+      <p className="card-number">{element}</p>
+    );
   //Lifecycle
   useEffect(() => {
     checkMatch();
@@ -88,28 +95,28 @@ function GameBoard({ updateWinner, boardReset, addPlayerMove }) {
 
   useEffect(() => {
     setCards(cardsRef.current);
-    setRandomBoardContent(generateRandomIconsBoard(4 * 4));
+    setRandomBoardContent(generateRandomBoard(boardSize ** 2, theme));
   }, []);
 
   useEffect(() => {
     if (boardReset) {
       restoreMatchedCards();
-      setRandomBoardContent(generateRandomIconsBoard(4 * 4));
+      setRandomBoardContent(generateRandomBoard(boardSize ** 2, theme));
     }
   }, [boardReset]);
 
   return (
     <div className="game-board">
-      {randomBoardContent?.map((icon, i) => (
+      {randomBoardContent?.map((element, i) => (
         <div
           ref={(item) => (cardsRef.current[i] = item)}
-          name={`card-${icon}-${i}`}
-          value={icon}
+          name={`card-${element}-${i}`}
+          value={element}
           key={i}
           className="memory-card"
-          onClick={() => handleSelect(`card-${icon}-${i}`)}
+          onClick={() => handleSelect(`card-${element}-${i}`)}
         >
-          <FeatherIcon icon={icon} />
+          {renderTheme(element)}
         </div>
       ))}
       <WinnerModal show={winnerModal} onHide={() => setWinnerModal(false)} />
@@ -119,7 +126,8 @@ function GameBoard({ updateWinner, boardReset, addPlayerMove }) {
 
 const mapStateToProps = (state) => {
   return {
-    boardReset: state.entities.game.board.reset
+    boardReset: state.entities.game.board.reset,
+    settings: state.entities.game.settings
   };
 };
 

@@ -54,6 +54,10 @@
       transition: transform 0.2s;
     }
   }
+  & .card-number {
+    margin: 16px 0;
+    transform: rotateY(180deg);
+  }
   & .flip {
     transform: rotateY(180deg);
     content-visibility: visible;

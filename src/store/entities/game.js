@@ -37,42 +37,31 @@ const slice = createSlice({
       for (let i = 1; i <= payload.numberOfPlayers; i++) {
         result.push({ id: i, moves: 0, winner: false });
       }
-      return { ...game, players: result };
+      game.players = result;
     },
     updateSettings: (game, { payload }) => {
-      return { ...game, settings: payload };
+      game.settings = payload;
     },
     updateGameTime: (game, { payload }) => {
-      return { ...game, time: { ...game.time, [payload.type]: payload.value } };
+      game.time[payload.type] = payload.value;
     },
     updateWinner: (game, { payload }) => {
-      const gameCopy = { ...game };
-      const index = gameCopy.players.findIndex(
+      const index = game.players.findIndex(
         (player) => player.id === payload.id
       );
-      gameCopy.players[index].winner = true;
-      gameCopy.time.finished = Date.now();
-      return gameCopy;
+      game.players[index].winner = true;
+      game.time.finished = Date.now();
     },
     restartGame: (game) => {
-      const playersCopy = [...game.players];
-      playersCopy.forEach((player) => {
+      game.players.forEach((player) => {
         player.winner = false;
         player.moves = 0;
       });
-
-      return {
-        ...game,
-        players: playersCopy,
-        time: { started: Date.now(), finished: 0 },
-        board: { reset: true }
-      };
+      game.board.reset = true;
+      game.time = { started: Date.now(), finished: 0 };
     },
     restoreBoardReset: (game) => {
-      return {
-        ...game,
-        board: { reset: false }
-      };
+      game.board.reset = false;
     }
   }
 });
