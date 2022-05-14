@@ -1,6 +1,6 @@
+import React, { useEffect, useState } from "react";
 import Button from "components/Button/Button";
 import ListRow from "components/ListRow/ListRow";
-import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";

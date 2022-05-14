@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import { generateRandomBoard } from "utils/globalUtils";
-import FeatherIcon from "feather-icons-react";
-import "./game.scss";
 import WinnerModal from "components/Modals/WinnerModal";
-import { addPlayerMove, updateWinner } from "store/entities/game";
+import FeatherIcon from "feather-icons-react";
 import { connect } from "react-redux";
+import { addPlayerMove, updateWinner } from "store/entities/game";
+import { generateRandomBoard } from "utils/globalUtils";
+import "./game.scss";
 
 function GameBoard({ updateWinner, boardReset, addPlayerMove, settings }) {
-  const [currentPlayer, setCurrentPlayer] = useState({ id: 1, moves: 0 });
+  const [currentPlayer] = useState({ id: 1, moves: 0 });
   const [cards, setCards] = useState([]);
   const [randomBoardContent, setRandomBoardContent] = useState(undefined);
   const [winnerModal, setWinnerModal] = useState(false);
@@ -118,6 +118,9 @@ function GameBoard({ updateWinner, boardReset, addPlayerMove, settings }) {
           key={i}
           className="memory-card"
           onClick={() => handleSelect(`card-${element}-${i}`)}
+          onKeyUp={() => handleSelect(`card-${element}-${i}`)}
+          role="button"
+          tabIndex={0}
         >
           {renderTheme(element)}
         </div>

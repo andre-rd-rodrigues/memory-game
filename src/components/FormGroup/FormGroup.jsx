@@ -1,6 +1,6 @@
 import React, { useEffect, useState, memo } from "react";
-import styles from "./formgroup.module.scss";
 import colors from "styles/_mixins.scss";
+import styles from "./formgroup.module.scss";
 
 const FormGroup = ({ label, inputs = [""], onChange }) => {
   const [selected, setSelected] = useState(inputs[0]);

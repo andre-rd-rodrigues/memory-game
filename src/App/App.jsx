@@ -1,6 +1,6 @@
+import React from "react";
 import Game from "pages/Game/Game";
 import Settings from "pages/Settings/Settings";
-import React from "react";
 import { Switch, Route } from "react-router-dom";
 import "styles/global.scss";
 

@@ -1,5 +1,5 @@
-import { icons } from "mocks/local-data";
 import shuffle from "lodash.shuffle";
+import { icons } from "mocks/local-data";
 
 const generateNumbersArray = (n) => {
   let result = [];
@@ -20,9 +20,11 @@ const generateRandomBoard = (boardSize, type) => {
       break;
 
     default:
-      const numbersArray = generateNumbersArray(boardSize / 2);
       for (let i = 0; i < boardSize / 2; i++) {
-        boardElements.push(numbersArray[i], numbersArray[i]);
+        boardElements.push(
+          generateNumbersArray(boardSize / 2)[i],
+          generateNumbersArray(boardSize / 2)[i]
+        );
       }
       break;
   }

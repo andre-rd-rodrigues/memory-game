@@ -1,5 +1,5 @@
-import FormGroup from "components/FormGroup/FormGroup";
 import React from "react";
+import FormGroup from "components/FormGroup/FormGroup";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import {

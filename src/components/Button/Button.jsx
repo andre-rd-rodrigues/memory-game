@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./button.module.scss";
 import colors from "styles/_mixins.scss";
+import styles from "./button.module.scss";
 
 const Button = ({ color, label, onClick }) => {
   return (
