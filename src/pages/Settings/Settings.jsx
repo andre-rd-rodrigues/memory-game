@@ -1,6 +1,5 @@
 import React from "react";
 import FormGroup from "components/FormGroup/FormGroup";
-import { motion } from "framer-motion";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -10,7 +9,8 @@ import {
 } from "store/entities/game";
 import {
   containerVariant,
-  horizontalEntrance
+  horizontal,
+  motion
 } from "styles/motions/motionVariants";
 import { generateNumbersArray } from "utils/globalUtils";
 import styles from "./settings.module.scss";
@@ -44,9 +44,10 @@ const Settings = ({
       variants={containerVariant}
       initial="hidden"
       animate="visible"
+      exit="exit"
     >
-      <motion.h1 variants={horizontalEntrance}>memory</motion.h1>
-      <motion.div variants={horizontalEntrance} className={styles.box}>
+      <motion.h1 variants={horizontal}>memory</motion.h1>
+      <motion.div variants={horizontal} className={styles.box}>
         <FormGroup
           label="Select Theme"
           inputs={["Icons", "Numbers"]}

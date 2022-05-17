@@ -1,15 +1,15 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { connect } from "react-redux";
 import { newGame, restartGame } from "store/entities/game";
-import { verticalEntrance } from "styles/motions/motionVariants";
+import { vertical, motion } from "styles/motions/motionVariants";
 
 function GameHeader({ restartGame, newGame }) {
   return (
     <motion.div
-      variants={verticalEntrance}
+      variants={vertical}
       initial="hidden"
       animate="visible"
+      exit="exit"
       className="game-header"
     >
       <h2>memory</h2>

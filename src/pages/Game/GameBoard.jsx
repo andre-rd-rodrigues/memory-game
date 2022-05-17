@@ -1,14 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import WinnerModal from "components/Modals/WinnerModal";
 import FeatherIcon from "feather-icons-react";
-import { motion } from "framer-motion";
 import { connect } from "react-redux";
 import { addPlayerMove, updateWinner } from "store/entities/game";
-import {
-  containerVariant,
-  horizontalEntrance,
-  scaleEntrance
-} from "styles/motions/motionVariants";
+import { horizontal, motion } from "styles/motions/motionVariants";
 import { generateRandomBoard } from "utils/globalUtils";
 import "./game.scss";
 
@@ -113,9 +108,10 @@ function GameBoard({ updateWinner, boardReset, addPlayerMove, settings }) {
 
   return (
     <motion.div
-      variants={horizontalEntrance}
+      variants={horizontal}
       initial="hidden"
       animate="visible"
+      exit="exit"
       className="game-board"
       style={{ maxWidth: boardSize === 4 ? "360px" : "550px" }}
     >

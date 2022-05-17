@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 const containerVariant = {
   hidden: {
     opacity: 0
@@ -7,10 +9,13 @@ const containerVariant = {
     transition: {
       staggerChildren: 0.2
     }
+  },
+  exit: {
+    opacity: 0
   }
 };
 
-const horizontalEntrance = {
+const horizontal = {
   hidden: {
     opacity: 0,
     x: -90
@@ -21,10 +26,17 @@ const horizontalEntrance = {
     transition: {
       type: "spring"
     }
+  },
+  exit: {
+    x: 90,
+    opacity: 0,
+    transition: {
+      ease: "easeInOut"
+    }
   }
 };
 
-const verticalEntrance = {
+const vertical = {
   hidden: {
     opacity: 0,
     y: -90
@@ -36,7 +48,14 @@ const verticalEntrance = {
       type: "spring"
     }
   },
+  exit: {
+    y: -90,
+    opacity: 0,
+    transition: {
+      type: "spring"
+    }
+  },
   viewport: { once: true }
 };
 
-export { containerVariant, horizontalEntrance, verticalEntrance };
+export { containerVariant, horizontal, vertical, motion };
