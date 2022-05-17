@@ -21,11 +21,12 @@
     "eslint-plugin-import": "^2.26.0",
     "feather-icons-react": "^0.5.0",
     "framer-motion": "^6.3.3",
+    "jest-dom": "^4.0.0",
     "lodash.shuffle": "^4.2.0",
     "node-sass": "^4.14.1",
-    "react": "^17.0.1",
+    "react": "^16.0.1",
     "react-bootstrap": "^1.6.4",
-    "react-dom": "^17.0.1",
+    "react-dom": "^16.0.1",
     "react-redux": "^8.0.1",
     "react-router-dom": "^5.3.1",
     "react-scripts": "5.0.1",
@@ -43,6 +44,11 @@
     "lint": "eslint \"src/**/*.{js,jsx}\"",
     "lint:fix": "eslint \"src/**/*.{js,jsx}\" --fix",
     "prepare": "husky install"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -64,6 +70,9 @@
   },
   "devDependencies": {
     "@redux-devtools/core": "^3.12.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "enzyme-to-json": "^3.6.2",
     "eslint": "^8.15.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-testing-library": "^5.4.0",

@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List row should render correctly 1`] = `
+<ConnectedComponent>
+  <MemoryRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "canGo": [Function],
+          "createHref": [Function],
+          "entries": Array [
+            Object {
+              "hash": "",
+              "key": "9qk0e2",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            },
+          ],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "index": 0,
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "key": "9qk0e2",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+    >
+      <Provider
+        store={
+          Object {
+            "@@observable": [Function],
+            "dispatch": [Function],
+            "getState": [Function],
+            "replaceReducer": [Function],
+            "subscribe": [Function],
+          }
+        }
+      >
+        <Connect(WinnerModal)
+          content="10"
+          label="Moves Taken"
+        >
+          <WinnerModal
+            content="10"
+            label="Moves Taken"
+            newGame={[Function]}
+            players={
+              Array [
+                Object {
+                  "id": 1,
+                  "moves": 0,
+                  "winner": false,
+                },
+              ]
+            }
+            restartGame={[Function]}
+            time={
+              Object {
+                "finished": 0,
+                "started": 0,
+              }
+            }
+          >
+            <Modal
+              animation={true}
+              autoFocus={true}
+              backdrop="static"
+              centered={true}
+              dialogAs={
+                Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "displayName": "ModalDialog",
+                  "render": [Function],
+                }
+              }
+              enforceFocus={true}
+              id="winner-modal"
+              keyboard={true}
+              restoreFocus={true}
+              show={false}
+            >
+              <Modal
+                autoFocus={true}
+                backdrop="static"
+                backdropTransition={[Function]}
+                containerClassName="modal-open"
+                enforceFocus={true}
+                keyboard={true}
+                manager={
+                  BootstrapModalManager {
+                    "containers": Array [],
+                    "data": Array [],
+                    "handleContainerOverflow": true,
+                    "hideSiblingNodes": true,
+                    "modals": Array [],
+                    "scrollbarSize": 0,
+                  }
+                }
+                onEnter={[Function]}
+                onEntering={[Function]}
+                onEscapeKeyDown={[Function]}
+                onExit={[Function]}
+                onExited={[Function]}
+                renderBackdrop={[Function]}
+                renderDialog={[Function]}
+                restoreFocus={true}
+                show={false}
+                transition={[Function]}
+              />
+            </Modal>
+          </WinnerModal>
+        </Connect(WinnerModal)>
+      </Provider>
+    </Router>
+  </MemoryRouter>
+</ConnectedComponent>
+`;

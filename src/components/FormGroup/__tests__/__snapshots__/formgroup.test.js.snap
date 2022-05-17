@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form Group should render correctly 1`] = `
+<div
+  className="formGroup"
+>
+  <p
+    className="form-label"
+  >
+    Select Theme
+  </p>
+  <div
+    className="form-select"
+  >
+    <button
+      key="0"
+      onClick={[Function]}
+      style={
+        Object {
+          "backgroundColor": undefined,
+        }
+      }
+    >
+      Icons
+    </button>
+    <button
+      key="1"
+      onClick={[Function]}
+      style={
+        Object {
+          "backgroundColor": "",
+        }
+      }
+    >
+      Numbers
+    </button>
+  </div>
+</div>
+`;

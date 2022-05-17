@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List row should render correctly 1`] = `
+<div
+  className="listRow"
+>
+  <p>
+    Moves Taken
+  </p>
+  <p>
+    10
+  </p>
+</div>
+`;
