@@ -37,7 +37,7 @@ const WinnerModal = ({ show, onHide, players, time, restartGame }) => {
       backdrop="static"
     >
       <Modal.Body>
-        <h2>Player {winner?.id} Wins!</h2>
+        <h2>You win!</h2>
         <p id="modal-subtitle">Game over! Here are the results...</p>
         <ListRow
           label="Time Elapsed"

@@ -1,5 +1,6 @@
 import React from "react";
 import FormGroup from "components/FormGroup/FormGroup";
+import { motion } from "framer-motion";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -7,6 +8,10 @@ import {
   updatePlayers,
   updateSettings
 } from "store/entities/game";
+import {
+  containerVariant,
+  horizontalEntrance
+} from "styles/motions/motionVariants";
 import { generateNumbersArray } from "utils/globalUtils";
 import styles from "./settings.module.scss";
 
@@ -34,9 +39,14 @@ const Settings = ({
     updateGameTime({ type: "started", value: Date.now() });
 
   return (
-    <div className={styles.settings}>
-      <h1>memory</h1>
-      <div className={styles.box}>
+    <motion.div
+      className={styles.settings}
+      variants={containerVariant}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.h1 variants={horizontalEntrance}>memory</motion.h1>
+      <motion.div variants={horizontalEntrance} className={styles.box}>
         <FormGroup
           label="Select Theme"
           inputs={["Icons", "Numbers"]}
@@ -57,8 +67,8 @@ const Settings = ({
             Start Game
           </button>
         </Link>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

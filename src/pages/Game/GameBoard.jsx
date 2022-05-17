@@ -1,8 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import WinnerModal from "components/Modals/WinnerModal";
 import FeatherIcon from "feather-icons-react";
+import { motion } from "framer-motion";
 import { connect } from "react-redux";
 import { addPlayerMove, updateWinner } from "store/entities/game";
+import {
+  containerVariant,
+  horizontalEntrance,
+  scaleEntrance
+} from "styles/motions/motionVariants";
 import { generateRandomBoard } from "utils/globalUtils";
 import "./game.scss";
 
@@ -81,7 +87,7 @@ function GameBoard({ updateWinner, boardReset, addPlayerMove, settings }) {
       setCards(cardsCopy);
     }
   };
-  const renderTheme = (element) =>
+  const Theme = ({ element }) =>
     theme === "icons" ? (
       <FeatherIcon icon={element} />
     ) : (
@@ -106,7 +112,10 @@ function GameBoard({ updateWinner, boardReset, addPlayerMove, settings }) {
   }, [boardReset]);
 
   return (
-    <div
+    <motion.div
+      variants={horizontalEntrance}
+      initial="hidden"
+      animate="visible"
       className="game-board"
       style={{ maxWidth: boardSize === 4 ? "360px" : "550px" }}
     >
@@ -122,11 +131,11 @@ function GameBoard({ updateWinner, boardReset, addPlayerMove, settings }) {
           role="button"
           tabIndex={0}
         >
-          {renderTheme(element)}
+          <Theme element={element} />
         </div>
       ))}
       <WinnerModal show={winnerModal} onHide={() => setWinnerModal(false)} />
-    </div>
+    </motion.div>
   );
 }
 
