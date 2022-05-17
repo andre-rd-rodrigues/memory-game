@@ -60,6 +60,13 @@ const slice = createSlice({
       game.board.reset = true;
       game.time = { started: Date.now(), finished: 0 };
     },
+    newGame: (game) => {
+      window.location.hash = "#";
+      game.settings = {
+        theme: "icons",
+        boardSize: 4
+      };
+    },
     restoreBoardReset: (game) => {
       game.board.reset = false;
     }
@@ -73,7 +80,8 @@ export const {
   updateWinner,
   restartGame,
   restoreBoardReset,
-  addPlayerMove
+  addPlayerMove,
+  newGame
 } = slice.actions;
 
 export default slice.reducer;

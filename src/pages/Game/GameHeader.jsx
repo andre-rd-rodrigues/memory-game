@@ -1,11 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { restartGame } from "store/entities/game";
+import { newGame, restartGame } from "store/entities/game";
 import { verticalEntrance } from "styles/motions/motionVariants";
 
-function GameHeader({ restartGame }) {
+function GameHeader({ restartGame, newGame }) {
   return (
     <motion.div
       variants={verticalEntrance}
@@ -18,9 +17,7 @@ function GameHeader({ restartGame }) {
         <button name="Restart" onClick={() => restartGame()}>
           Restart
         </button>
-        <Link to="/settings">
-          <button>New Game</button>
-        </Link>
+        <button onClick={newGame}>New Game</button>
       </div>
     </motion.div>
   );
@@ -28,7 +25,8 @@ function GameHeader({ restartGame }) {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    restartGame: (obj) => dispatch(restartGame(obj))
+    restartGame: (obj) => dispatch(restartGame(obj)),
+    newGame: (obj) => dispatch(newGame(obj))
   };
 };
 

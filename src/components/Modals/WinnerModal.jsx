@@ -3,12 +3,11 @@ import Button from "components/Button/Button";
 import ListRow from "components/ListRow/ListRow";
 import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { restartGame } from "store/entities/game";
+import { newGame, restartGame } from "store/entities/game";
 import { getTimeElapsed } from "utils/globalUtils";
 import "./modals.scss";
 
-const WinnerModal = ({ show, onHide, players, time, restartGame }) => {
+const WinnerModal = ({ show, onHide, players, time, restartGame, newGame }) => {
   const [winner, setWinner] = useState(undefined);
 
   const winnerFromStore = () =>
@@ -16,11 +15,6 @@ const WinnerModal = ({ show, onHide, players, time, restartGame }) => {
 
   const handleRestart = () => {
     restartGame();
-    return onHide();
-  };
-
-  const handleNewGame = () => {
-    <Redirect to="settings" />;
     return onHide();
   };
 
@@ -46,11 +40,7 @@ const WinnerModal = ({ show, onHide, players, time, restartGame }) => {
         <ListRow label="Moves Taken" content={`${winner?.moves} Moves`} />
         <div className="modal-actions">
           <Button label="Restart" color="orange" onClick={handleRestart} />
-          <Button
-            label="New Game"
-            color="secondary-light"
-            onClick={handleNewGame}
-          />
+          <Button label="New Game" color="secondary-light" onClick={newGame} />
         </div>
       </Modal.Body>
     </Modal>
@@ -66,7 +56,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    restartGame: (obj) => dispatch(restartGame(obj))
+    restartGame: (obj) => dispatch(restartGame(obj)),
+    newGame: (obj) => dispatch(newGame(obj))
   };
 };
 
