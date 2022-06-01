@@ -1,28 +1,28 @@
-import { loginUser } from "store/entities/user";
-import { axiosInstance } from "./axios";
+import axios from "axios";
+import { setStorage } from "utils/authUtils";
 
-//Token
-const sessionStorage_token = "memory_auth_token";
-const setToken = (token) => sessionStorage.setItem(sessionStorage_token, token);
-const getToken = sessionStorage.getItem(sessionStorage_token);
+// Set config defaults when creating the instance
+const authRequest = axios.create({
+  baseURL: `${process.env.REACT_APP_BASE_URL}auth`
+});
 
-//Login
-const loginRequest = async (values) => {
-  await axiosInstance
-    .post("auth/login", {
+const postLogin = async (values) =>
+  await authRequest
+    .post("/login", {
       password: values.password,
       email: values.email
     })
     .then(({ data }) => {
       const { email, id, name, token } = data.results;
-      loginUser({ email, id, name });
-      setToken(token);
+
+      let user = { email, id, name };
+
+      //Set storage (user & token)
+      setStorage(token, user);
+      return data;
     })
     .catch((err) => {
-      console.log(err);
+      return err?.response?.data;
     });
-};
 
-//Register
-
-export { setToken, getToken, loginRequest };
+export { authRequest, postLogin };

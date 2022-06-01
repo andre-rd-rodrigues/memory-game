@@ -9,7 +9,7 @@
   "homepage": "http://andre-rd-rodrigues.github.io/memory-game",
   "dependencies": {
     "@babel/eslint-parser": "^7.17.0",
-    "@reduxjs/toolkit": "^1.8.1",
+    "@reduxjs/toolkit": "^1.7.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -29,11 +29,13 @@
     "react": "^16.0.1",
     "react-bootstrap": "^1.6.4",
     "react-dom": "^16.0.1",
-    "react-redux": "^8.0.1",
+    "react-redux": "^7.2.6",
     "react-router-dom": "^5.3.1",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.12.0",
     "react-uuid": "^1.0.2",
-    "redux": "^4.2.0",
+    "redux": "^4.1.2",
+    "redux-devtools-extension": "^2.13.9",
     "web-vitals": "^1.1.2",
     "yup": "^0.32.11"
   },
@@ -72,7 +74,6 @@
     ]
   },
   "devDependencies": {
-    "@redux-devtools/core": "^3.12.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.2",

@@ -4,13 +4,16 @@ import { createSlice } from "@reduxjs/toolkit";
 const slice = createSlice({
   name: "user",
   initialState: {
-    name: "",
-    id: "",
-    email: ""
+    name: undefined,
+    id: undefined,
+    email: undefined
   },
   reducers: {
     loginUser: (user, { payload }) => {
-      user = { ...payload.user };
+      const { name, email, id } = payload;
+      user.name = name;
+      user.email = email;
+      user.id = id;
     }
   }
 });

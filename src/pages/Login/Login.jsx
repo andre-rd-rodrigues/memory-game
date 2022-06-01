@@ -1,10 +1,13 @@
 import React from "react";
-import { loginRequest } from "api/auth";
+import { postLogin } from "api/auth";
 import Button from "components/Button/Button";
 import ErrorMessage from "components/Form/ErrorMessage";
 import InputField from "components/Form/InputField";
 import { Formik } from "formik";
 import { Form } from "react-bootstrap";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { updateLoading } from "store/ui/loading";
 import {
   containerVariant,
   horizontal,
@@ -13,11 +16,21 @@ import {
 import { formikSettings } from "utils/formikSchemas";
 import styles from "./login.module.scss";
 
-const Login = () => {
+const Login = ({ updateLoading }) => {
   const { initialValues, schemas } = formikSettings;
+  const history = useHistory();
 
-  const handleLogin = (values) => {
-    loginRequest(values);
+  const handleLogin = async (values) => {
+    updateLoading(true);
+
+    await postLogin(values)
+      .then(() => {
+        history.replace("/settings", "");
+        setTimeout(() => updateLoading(false), 2000);
+      })
+      .catch(() => {
+        updateLoading(false);
+      });
   };
   return (
     <div className={styles.login}>
@@ -78,4 +91,10 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateLoading: (obj) => dispatch(updateLoading(obj))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Login);

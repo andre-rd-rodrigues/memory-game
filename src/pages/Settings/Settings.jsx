@@ -12,7 +12,6 @@ import {
   horizontal,
   motion
 } from "styles/motions/motionVariants";
-import { generateNumbersArray } from "utils/globalUtils";
 import styles from "./settings.module.scss";
 
 const Settings = ({
@@ -63,6 +62,7 @@ const Settings = ({
           inputs={["4x4", "6x6"]}
           onChange={handleChange}
         />
+
         <Link to="/game">
           <button id="start-game-button" onClick={handleStart}>
             Start Game
@@ -74,7 +74,9 @@ const Settings = ({
 };
 
 const mapStateToProps = (state) => {
-  return { storeSettings: state.entities.game.settings };
+  return {
+    storeSettings: state.entities.game.settings
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
