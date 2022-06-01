@@ -17,9 +17,11 @@
     "@types/node": "^12.20.50",
     "@types/react": "^17.0.45",
     "@types/react-dom": "^17.0.16",
+    "axios": "^0.27.2",
     "bootstrap": "^4.6.1",
     "eslint-plugin-import": "^2.26.0",
     "feather-icons-react": "^0.5.0",
+    "formik": "^2.2.9",
     "framer-motion": "^6.3.3",
     "jest-dom": "^4.0.0",
     "lodash.shuffle": "^4.2.0",
@@ -32,7 +34,8 @@
     "react-scripts": "5.0.1",
     "react-uuid": "^1.0.2",
     "redux": "^4.2.0",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",

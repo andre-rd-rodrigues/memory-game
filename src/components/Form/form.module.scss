@@ -1,0 +1,40 @@
+@import "styles/mixins";
+
+.error {
+  background-color: rgba(255, 0, 0, 0.089);
+  margin: 0 0 30px 0;
+  padding: 10px 16px;
+  & p {
+    margin: 0;
+    color: rgb(221, 79, 79);
+    font-weight: 500;
+  }
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  & input {
+    padding: 11px 10px;
+    margin-bottom: 25px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.096);
+    font-family: "Lato", sans-serif;
+    font-weight: 200;
+    font-size: 16px;
+    &::placeholder {
+      color: rgb(190, 190, 190);
+    }
+  }
+  & label {
+    margin-bottom: 10px;
+  }
+}
+
+.submitButton {
+  @include button($orange, white);
+  width: 100%;
+  padding: 0.5rem 0;
+  font-size: 1.1rem;
+}

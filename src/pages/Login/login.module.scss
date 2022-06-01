@@ -1,0 +1,23 @@
+@import "styles/mixins";
+
+.login {
+  background-color: $primary;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  & h1 {
+    color: white;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 3rem;
+  }
+}
+
+.box {
+  background-color: white;
+  width: 27rem;
+  padding: 2.2rem;
+  border-radius: 1rem;
+}
