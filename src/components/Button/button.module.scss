@@ -2,4 +2,11 @@
 
 .button {
   @include button(none, white);
+  position: relative;
+  & svg {
+    position: absolute;
+    left: 1rem;
+    top: 12px;
+    color: rgba(255, 255, 255, 0.626);
+  }
 }

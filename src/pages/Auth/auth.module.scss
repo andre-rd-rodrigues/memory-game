@@ -1,6 +1,6 @@
 @import "styles/mixins";
 
-.login {
+.auth {
   background-color: $primary;
   min-height: 100vh;
   display: flex;
@@ -12,6 +12,14 @@
     font-weight: 700;
     font-size: 2rem;
     margin-bottom: 3rem;
+  }
+  & a[class="auth_redirect"] {
+    display: block;
+    text-align: center;
+    margin-top: 0.8rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: $primary-light;
   }
 }
 

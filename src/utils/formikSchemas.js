@@ -22,9 +22,9 @@ const formikSettings = {
         .oneOf([yup.ref("password"), null], "Passwords must match"),
       name: yup
         .string()
-        .min(4, "Must be upper than 4 letters")
-        .max(100, "Must be lesser than 100 letters")
-        .required()
+        .min(4, "Must be upper than 4 characters")
+        .max(100, "Must be lesser than 100 characters")
+        .required("Name is required")
     })
   },
 

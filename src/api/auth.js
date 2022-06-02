@@ -25,4 +25,18 @@ const postLogin = async (values) =>
       return err?.response?.data;
     });
 
-export { authRequest, postLogin };
+const postRegister = async (values) =>
+  await authRequest
+    .post("/register", {
+      password: values.password,
+      email: values.email,
+      name: values.name
+    })
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => {
+      return err?.response?.data;
+    });
+
+export { authRequest, postLogin, postRegister };
