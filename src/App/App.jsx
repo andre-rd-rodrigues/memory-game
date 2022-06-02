@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { getUser } from "api/user";
 import Loading from "components/Loading/Loading";
 import { AnimatePresence } from "framer-motion";
 import Login from "pages/Auth/Login/Login";
@@ -7,22 +8,17 @@ import Game from "pages/Game/Game";
 import Settings from "pages/Settings/Settings";
 import { connect } from "react-redux";
 import { Switch, Route, useLocation } from "react-router-dom";
-import "styles/global.scss";
 import { ToastContainer } from "react-toastify";
-import { getUser } from "api/user";
 import { updateUser } from "store/entities/user";
+import "styles/global.scss";
 
 const App = ({ updateUser }) => {
   const location = useLocation();
 
   const getUserHttp = async () => {
-    await getUser()
-      .then((data) => {
-        updateUser(data);
-      })
-      .catch((err) => {
-        throw err;
-      });
+    await getUser().then((data) => {
+      if (data) return updateUser(data);
+    });
   };
   useEffect(() => {
     getUserHttp();

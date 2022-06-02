@@ -1,5 +1,7 @@
 import axios from "axios";
-import { getToken, getUserFromStorage } from "utils/authUtils";
+import { notification, authUtils } from "utils";
+
+const { getToken, getUserFromStorage, setToken } = authUtils;
 
 // User
 const user = getUserFromStorage;
@@ -9,14 +11,36 @@ const userRequest = axios.create({
   baseURL: `${process.env.REACT_APP_BASE_URL}/user/${user?.id}`
 });
 
+//Interceptor
+
 userRequest.interceptors.request.use(
   function (config) {
     const token = getToken;
     config.headers.Authorization = `Bearer ${token}`;
+
+    if (!user) {
+      window.location.hash = "#/login";
+      throw "User not authenticated";
+    }
+
     return config;
   },
-  function (error) {
-    return Promise.reject(error);
+  function (err) {
+    return Promise.reject(err);
+  }
+);
+
+userRequest.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  function (err) {
+    const status = err?.response?.status;
+    if (status === 401) {
+      setToken(undefined);
+      window.location.hash = "#/login";
+    }
+    return Promise.reject(err);
   }
 );
 
@@ -38,18 +62,15 @@ const postGameMatch = async (values) => {
     });
 };
 const getUser = async () => {
-  if (!user) {
-    window.location.hash = "#/login";
-    throw "User not authenticated";
-  }
-
   return await userRequest
     .get("")
     .then(({ data }) => {
       return data?.results?.user;
     })
     .catch((err) => {
-      throw err?.response?.data;
+      const response = err?.response?.data;
+
+      return notification(response.message, "error");
     });
 };
 
