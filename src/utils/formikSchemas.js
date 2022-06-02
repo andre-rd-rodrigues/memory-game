@@ -41,4 +41,4 @@ const formikSettings = {
   }
 };
 
-export { formikSettings };
+export default formikSettings;

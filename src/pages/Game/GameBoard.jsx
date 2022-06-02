@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import WinnerModal from "components/Modals/WinnerModal";
+import { WinnerModal } from "components";
 import FeatherIcon from "feather-icons-react";
 import { connect } from "react-redux";
 import { addPlayerMove, updateWinner } from "store/entities/game";
@@ -36,11 +36,15 @@ function GameBoard({ updateWinner, boardReset, addPlayerMove, settings }) {
     addPlayerMove({ id: currentPlayer.id });
     setCards(cardsCopy);
   };
-  const handleWin = () => {
-    updateWinner({ id: currentPlayer.id });
 
+  //Winner
+  const handleGameMatch = async () => {
+    updateWinner({ id: currentPlayer.id });
+    //Open winner modal
     setWinnerModal(true);
   };
+
+  //Checks
   const checkMatch = () => {
     const cardsCopy = [...cards];
     const flippedCards = cardsCopy.filter((icon) =>
@@ -70,7 +74,7 @@ function GameBoard({ updateWinner, boardReset, addPlayerMove, settings }) {
     const filteredMatch = cards.filter((icon) =>
       icon.classList.contains("matched")
     );
-    if (filteredMatch.length === 4 * 4) return handleWin();
+    if (filteredMatch.length === 4 * 4) return handleGameMatch();
   };
   const restoreMatchedCards = () => {
     const cardsCopy = [...cards];
@@ -82,12 +86,15 @@ function GameBoard({ updateWinner, boardReset, addPlayerMove, settings }) {
       setCards(cardsCopy);
     }
   };
+
+  //Render icons or numbers
   const Theme = ({ element }) =>
     theme === "icons" ? (
       <FeatherIcon icon={element} />
     ) : (
       <p className="card-number">{element}</p>
     );
+
   //Lifecycle
   useEffect(() => {
     checkMatch();

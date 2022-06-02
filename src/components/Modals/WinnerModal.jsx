@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { postGameMatch } from "api/user";
 import Button from "components/Button/Button";
 import ListRow from "components/ListRow/ListRow";
 import { Modal } from "react-bootstrap";
@@ -7,19 +8,48 @@ import { newGame, restartGame } from "store/entities/game";
 import { getTimeElapsed } from "utils/globalUtils";
 import "./modals.scss";
 
-const WinnerModal = ({ show, onHide, players, time, restartGame, newGame }) => {
+const WinnerModal = ({
+  show,
+  onHide,
+  players,
+  time,
+  restartGame,
+  newGame,
+  user
+}) => {
   const [winner, setWinner] = useState(undefined);
+  const [updatedDB, setUpdatedDB] = useState(false);
 
-  const winnerFromStore = () =>
+  const handleGameMatch = async () => {
+    //Set winner
     setWinner(players?.filter((player) => player.winner)[0]);
 
-  const handleRestart = () => {
-    restartGame();
+    //Game match
+    const match = {
+      duration: getTimeElapsed(time.started, time.finished),
+      moves: winner?.moves,
+      date: new Date().toDateString()
+    };
+    console.log(user);
+    //Save results in db
+    // await postGameMatch(match)
+    //   .then(() => setUpdatedDB(true))
+    //   .catch((err) => console.log(err));
+  };
+
+  //Finish
+  const handleClose = (type) => {
+    if (type === "restart") {
+      restartGame();
+    } else {
+      newGame();
+    }
     return onHide();
   };
 
+  //Lifecycle
   useEffect(() => {
-    if (show) return winnerFromStore();
+    if (show && !updatedDB) handleGameMatch();
   }, [show]);
 
   return (
@@ -31,7 +61,7 @@ const WinnerModal = ({ show, onHide, players, time, restartGame, newGame }) => {
       backdrop="static"
     >
       <Modal.Body>
-        <h2>You win!</h2>
+        <h2>You won {user.name}!</h2>
         <p id="modal-subtitle">Game over! Here are the results...</p>
         <ListRow
           label="Time Elapsed"
@@ -39,8 +69,16 @@ const WinnerModal = ({ show, onHide, players, time, restartGame, newGame }) => {
         />
         <ListRow label="Moves Taken" content={`${winner?.moves} Moves`} />
         <div className="modal-actions">
-          <Button label="Restart" color="orange" onClick={handleRestart} />
-          <Button label="New Game" color="secondary-light" onClick={newGame} />
+          <Button
+            label="Restart"
+            color="orange"
+            onClick={() => handleClose("restart")}
+          />
+          <Button
+            label="New Game"
+            color="secondary-light"
+            nClick={() => handleClose("newGame")}
+          />
         </div>
       </Modal.Body>
     </Modal>
@@ -50,7 +88,8 @@ const WinnerModal = ({ show, onHide, players, time, restartGame, newGame }) => {
 const mapStateToProps = (state) => {
   return {
     players: state.entities.game.players,
-    time: state.entities.game.time
+    time: state.entities.game.time,
+    user: state.entities.user
   };
 };
 

@@ -5,11 +5,16 @@ const sessionStorage_user = "memory_user";
 const setToken = (token) => sessionStorage.setItem(sessionStorage_token, token);
 const getToken = sessionStorage.getItem(sessionStorage_token);
 
-const setUser = (user) => sessionStorage.setItem(sessionStorage_user, user);
+const setUser = (user) =>
+  sessionStorage.setItem(sessionStorage_user, JSON.stringify(user));
 
 const setStorage = (token, user) => {
   setToken(token);
   setUser(user);
 };
 
-export { setStorage, getToken, setToken };
+const getUserFromStorage = JSON.parse(
+  sessionStorage.getItem(sessionStorage_user)
+);
+
+export { setStorage, getToken, setToken, getUserFromStorage };

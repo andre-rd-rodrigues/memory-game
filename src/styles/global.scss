@@ -3,3 +3,38 @@
 * {
   font-weight: bold;
 }
+
+//Toasts
+.Toastify__toast-body {
+  text-align: center;
+  padding: 5px;
+  margin: auto;
+  color: white;
+  & path {
+    color: white;
+  }
+  & p {
+    margin: 0;
+    font-weight: 500;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  }
+}
+.Toastify__toast--success {
+  background: #42a285 !important;
+}
+.Toastify__toast--error {
+  background: #e17575 !important;
+}
+.Toastify__toast--warning {
+  background: $primary-light !important;
+}
+
+.Toastify__toast-icon {
+  & svg {
+    fill: white;
+  }
+}
+.progressBar {
+  background-color: white !important;
+}

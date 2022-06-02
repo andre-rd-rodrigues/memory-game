@@ -61,7 +61,7 @@ const slice = createSlice({
       game.time = { started: Date.now(), finished: 0 };
     },
     newGame: (game) => {
-      window.location.hash = "#";
+      window.location.hash = "#/settings";
       game.settings = {
         theme: "icons",
         boardSize: 4

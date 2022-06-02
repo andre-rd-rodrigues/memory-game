@@ -1,8 +1,6 @@
 import React from "react";
 import { postRegister } from "api/auth";
-import Button from "components/Button/Button";
-import ErrorMessage from "components/Form/ErrorMessage";
-import InputField from "components/Form/InputField";
+import { Button, ErrorMessage, InputField } from "components";
 import { Formik } from "formik";
 import { Form } from "react-bootstrap";
 import { connect } from "react-redux";
@@ -14,7 +12,7 @@ import {
   horizontal,
   motion
 } from "styles/motions/motionVariants";
-import { formikSettings } from "utils/formikSchemas";
+import { formikSettings } from "utils";
 import styles from "../auth.module.scss";
 
 const Register = ({ updateLoading }) => {
@@ -27,7 +25,7 @@ const Register = ({ updateLoading }) => {
     await postRegister(values)
       .then(() => {
         history.replace("/login", "");
-        setTimeout(() => updateLoading(false), 1500);
+        setTimeout(() => updateLoading(false), 1000);
       })
       .catch(() => {
         updateLoading(false);
