@@ -14,11 +14,11 @@ const userRequest = axios.create({
 //Interceptor
 userRequest.interceptors.request.use(
   function (config) {
-    if (!token) {
+    if (!token()) {
       return console.log("User not authenticated");
     }
 
-    config.headers.Authorization = `Bearer ${token}`;
+    config.headers.Authorization = `Bearer ${token()}`;
 
     return config;
   },

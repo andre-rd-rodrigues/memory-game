@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { newGame, restartGame } from "store/entities/game";
 import { getTimeElapsed } from "utils/globalUtils";
 import "./modals.scss";
+import { updateGameMatch } from "store/entities/user";
 
 const WinnerModal = ({
   show,
@@ -15,25 +16,32 @@ const WinnerModal = ({
   time,
   restartGame,
   newGame,
-  user
+  user,
+  updateGameMatch
 }) => {
   const [winner, setWinner] = useState(undefined);
   const [updatedDB, setUpdatedDB] = useState(false);
 
   const handleGameMatch = async () => {
     //Set winner
-    setWinner(players?.filter((player) => player.winner)[0]);
+    const winnerFromStore = players?.filter((player) => player.winner)[0];
+    setWinner(winnerFromStore);
 
     //Game match
     const match = {
       duration: getTimeElapsed(time.started, time.finished),
-      moves: winner?.moves,
+      moves: winnerFromStore?.moves,
       date: new Date().toDateString()
     };
 
     //Save results in db
     await postGameMatch(match)
-      .then(() => setUpdatedDB(true))
+      .then(() => {
+        //Update redux store
+        updateGameMatch(match);
+        //Avoid repeated requests
+        setUpdatedDB(true);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -61,8 +69,8 @@ const WinnerModal = ({
       backdrop="static"
     >
       <Modal.Body>
-        <h2>You won {user.name}!</h2>
-        <p id="modal-subtitle">Game over! Here are the results...</p>
+        <h2>Well done {user.name}!</h2>
+        <p id="modal-subtitle">Here are the results</p>
         <ListRow
           label="Time Elapsed"
           content={getTimeElapsed(time.started, time.finished)}
@@ -77,7 +85,7 @@ const WinnerModal = ({
           <Button
             label="New Game"
             color="secondary-light"
-            nClick={() => handleClose("newGame")}
+            onClick={() => handleClose("new game")}
           />
         </div>
       </Modal.Body>
@@ -96,7 +104,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     restartGame: (obj) => dispatch(restartGame(obj)),
-    newGame: (obj) => dispatch(newGame(obj))
+    newGame: (obj) => dispatch(newGame(obj)),
+    updateGameMatch: (obj) => dispatch(updateGameMatch(obj))
   };
 };
 

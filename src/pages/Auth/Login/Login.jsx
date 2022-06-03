@@ -4,7 +4,7 @@ import { Button, ErrorMessage, InputField } from "components";
 import { Formik } from "formik";
 import { Form } from "react-bootstrap";
 import { connect } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { updateLoading } from "store/ui/loading";
 import {

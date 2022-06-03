@@ -13,6 +13,7 @@ import {
   motion
 } from "styles/motions/motionVariants";
 import styles from "./settings.module.scss";
+import GameHeader from "pages/Game/GameHeader";
 
 const Settings = ({
   updatePlayers,
@@ -45,6 +46,7 @@ const Settings = ({
       animate="visible"
       exit="exit"
     >
+      <GameHeader />
       <motion.h1 variants={horizontal}>memory</motion.h1>
       <motion.div variants={horizontal} className={styles.box}>
         <FormGroup

@@ -35,6 +35,10 @@ $breaking-point-xs: 330px;
     @media (max-width: $breaking-point-xs) {
       @content;
     }
+  } @else {
+    @media (max-width: $point) {
+      @content;
+    }
   }
 }
 

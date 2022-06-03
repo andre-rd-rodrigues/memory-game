@@ -13,6 +13,7 @@
 .game-header {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   margin-bottom: 5rem;
   & h2 {
     font-weight: bold;
@@ -21,10 +22,13 @@
   }
   & button {
     @include button($secondary-light, $primary);
+    margin: 0 0.5rem;
     &[name="Restart"] {
       @include button($orange, white);
-      margin: 0 1rem;
     }
+  }
+  & div[class="dropdown"] {
+    display: inline;
   }
 }
 
@@ -50,7 +54,7 @@
     transition: transform 0.5s;
     cursor: pointer;
     transition: 0.2s ease;
-    /*  content-visibility: hidden; */
+    content-visibility: hidden;
     &:hover {
       opacity: 0.8;
     }
@@ -72,5 +76,14 @@
     transform: rotateY(180deg);
     background-color: $secondary;
     content-visibility: visible;
+  }
+}
+
+@include breakpoint(605px) {
+  .game-header {
+    justify-content: center;
+    & h2 {
+      margin-bottom: 2rem;
+    }
   }
 }
