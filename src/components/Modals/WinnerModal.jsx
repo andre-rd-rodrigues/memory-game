@@ -30,11 +30,11 @@ const WinnerModal = ({
       moves: winner?.moves,
       date: new Date().toDateString()
     };
-    console.log(user);
+
     //Save results in db
-    // await postGameMatch(match)
-    //   .then(() => setUpdatedDB(true))
-    //   .catch((err) => console.log(err));
+    await postGameMatch(match)
+      .then(() => setUpdatedDB(true))
+      .catch((err) => console.log(err));
   };
 
   //Finish

@@ -5,9 +5,11 @@ import "./game.scss";
 
 const Game = () => {
   return (
-    <div className="game">
-      <GameHeader />
-      <GameBoard />
+    <div className="game_bg">
+      <div className="game">
+        <GameHeader />
+        <GameBoard />
+      </div>
     </div>
   );
 };

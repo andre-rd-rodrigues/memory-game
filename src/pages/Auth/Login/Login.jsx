@@ -4,7 +4,7 @@ import { Button, ErrorMessage, InputField } from "components";
 import { Formik } from "formik";
 import { Form } from "react-bootstrap";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { updateLoading } from "store/ui/loading";
 import {
@@ -17,14 +17,14 @@ import styles from "../auth.module.scss";
 
 const Login = ({ updateLoading }) => {
   const { initialValues, schemas } = formikSettings;
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleLogin = async (values) => {
     updateLoading(true);
 
     await postLogin(values)
       .then(() => {
-        history.replace("/settings", "");
+        navigate("/settings", { replace: true });
         setTimeout(() => updateLoading(false), 1000);
       })
       .catch(() => {

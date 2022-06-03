@@ -3,16 +3,16 @@ import App from "App/App";
 import configureStore from "configureStore";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const store = configureStore();
 
 ReactDOM.render(
-  <HashRouter>
+  <BrowserRouter>
     <Provider store={store}>
       <App />
     </Provider>
-  </HashRouter>,
+  </BrowserRouter>,
   document.getElementById("root")
 );

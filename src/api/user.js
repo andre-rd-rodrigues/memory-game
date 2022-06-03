@@ -1,7 +1,7 @@
 import axios from "axios";
 import { notification, authUtils } from "utils";
 
-const { getToken, getUserFromStorage, setToken } = authUtils;
+const { token, getUserFromStorage, setToken } = authUtils;
 
 // User
 const user = getUserFromStorage;
@@ -12,16 +12,13 @@ const userRequest = axios.create({
 });
 
 //Interceptor
-
 userRequest.interceptors.request.use(
   function (config) {
-    const token = getToken;
-    config.headers.Authorization = `Bearer ${token}`;
-
-    if (!user) {
-      window.location.hash = "#/login";
-      throw "User not authenticated";
+    if (!token) {
+      return console.log("User not authenticated");
     }
+
+    config.headers.Authorization = `Bearer ${token}`;
 
     return config;
   },
@@ -35,10 +32,10 @@ userRequest.interceptors.response.use(
     return response;
   },
   function (err) {
+    //Token expiration
     const status = err?.response?.status;
     if (status === 401) {
       setToken(undefined);
-      window.location.hash = "#/login";
     }
     return Promise.reject(err);
   }
@@ -69,8 +66,7 @@ const getUser = async () => {
     })
     .catch((err) => {
       const response = err?.response?.data;
-
-      return notification(response.message, "error");
+      return response?.message;
     });
 };
 

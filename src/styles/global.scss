@@ -3,6 +3,9 @@
 * {
   font-weight: bold;
 }
+body {
+  background-color: $primary !important;
+}
 
 //Toasts
 .Toastify__toast-body {

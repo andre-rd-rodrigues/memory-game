@@ -1,5 +1,9 @@
 @import "styles/mixins";
 
+.game_bg {
+  background-color: white;
+  min-height: 100vh;
+}
 .game {
   max-width: 1000px;
   margin: auto;
